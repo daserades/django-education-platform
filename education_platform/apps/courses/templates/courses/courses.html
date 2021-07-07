@@ -2,35 +2,16 @@
 {% load static %}
 {% block content %}
 
-	<aside id="fh5co-hero">
-		<div class="flexslider">
-			<ul class="slides">
-		   	<li style="background-image: url(images/img_bg_4.jpg);">
-		   		<div class="overlay-gradient"></div>
-		   		<div class="container">
-		   			<div class="row">
-			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
-			   				<div class="slider-text-inner">
-			   					<h1 class="heading-section">Our Course</h1>
-									<h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
-			   				</div>
-			   			</div>
-			   		</div>
-		   		</div>
-		   	</li>
-		  	</ul>
-	  	</div>
-	</aside>
-
 	<div id="fh5co-course">
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
 					<h2>Our Course</h2>
-					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
 				</div>
 			</div>
-			<div class="row">
+				<div class="row">
+					<div class="col-md-10 animate-box fadeInUp animated-fast">
+						
                 {% for course in courses %}
 				<div class="col-md-6 animate-box">
 					<div class="course">
@@ -39,28 +20,47 @@
 						<div class="desc">
 							<h3><a href="#">{{ course.name }}</a></h3>
 							<p>{{ course.description | truncatechars:120 }}</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
+							<span><a href="{% url 'course' course.category.slug course.id %}" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
 						</div>
 					</div>
 				</div>
 				{% endfor %}
 			</div>
-		</div>
-	</div>
-
-	<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
-		<div class="overlay"></div>
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 animate-box">
-				<div class="date-counter text-center">
-					<h2>Get 400 of Online Courses for Free</h2>
-					<h3>By Mike Smith</h3>
-					<div class="simply-countdown simply-countdown-one"></div>
-					<p><strong>Limited Offer, Hurry Up!</strong></p>
-					<p><a href="#" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
+		
+	
+		<div class="col-md-2 animate-box fadeInUp animated-fast">
+			<div class="widget-search ">
+				<div class="site-search-area">
+					<form method="get" id="site-searchform" action="{% url 'search' %}">
+						<div>
+							<input class="input-text form-control" name="search" id="search-k" placeholder="Search keywords..." type="text">
+							<input id="searchsubmit" value="Search" type="submit">
+						</div>
+					</form>
+					<br/>
 				</div>
 			</div>
+			<div class="widget-categories ">
+				<h3 class="widget-title">Categories</h3>
+
+					<ul>
+						{% for category in categories %}
+						<li><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+						{% endfor %}
+					</ul>
+			</div>
+			<div class="widget-tags">
+				<h3 class="widget-title">Search Tags</h3>
+				<ul class="tags">
+					{% for tag in tags %}
+					<li><a href="{% url 'tag' tag.slug %}">{% if tag.slug in request.path %}<b>{{tag.name}}</b> {% else %}{{ tag.name }} {% endif %}</a></li>
+					{% endfor %}
+					
+				</ul>
+			</div>
 		</div>
-	</div>
+</div>
+</div>
+</div>
 
     {% endblock %}

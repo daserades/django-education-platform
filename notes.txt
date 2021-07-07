@@ -1,0 +1,32 @@
+python -m venv venv
+
+venv\Scripts\activate
+
+pip freeze
+pip install django
+pip install Pillow
+
+django-admin --help
+django-admin startproject education
+
+python manage.py startapp pages apps/pages
+
+python manage.py migrate
+
+python manage.py createsuperuser
+admin, admin@admin.com, adminpass
+
+python manage.py startapp courses apps/courses
+
+python manage.py makemigrations
+
+
+
+python manage.py migrate
+
+
+python manage.py shell
+
+python manage.py startapp teachers apps/teachers
+accounts
+python manage.py startapp accounts apps/accounts

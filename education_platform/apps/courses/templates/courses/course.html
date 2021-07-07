@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>{{ course.name }}<span class="m_1"></span></h1>
+		</div>
+	</div>
+
+    <div id="overviews" class="section wb">
+        <div class="container">
+            <div class="row"> 
+				<div class="col-md-10 animate-box fadeInUp animated-fast">
+					<div class="staff">
+						<div class="staff-img" style="background-image: url({{ course.image.url }});">
+							<ul class="fh5co-social">
+								<li><a href="{{course.teacher.facebook}}"><i class="icon-facebook2"></i></a></li>
+								<li><a href="{{course.teacher.twitter}}"><i class="icon-twitter2"></i></a></li>
+								<li><a href="{{course.teacher.youtube}}"><i class="icon-youtube"></i></a></li>
+								<li><a href="{{course.teacher.linkedin}}"><i class="icon-linkedin"></i></a></li>
+							</ul>
+						</div>
+
+						<h3><a href="{% url 'teacher' course.teacher.pk %}">{{course.teacher.name}}</a></h3>
+						<p>{{course.description}}</p>
+					</div>
+					
+                </div><!-- end col -->
+				<div class="col-md-2 animate-box fadeInUp animated-fast">
+					<div class="widget-search">
+						<div class="site-search-area">
+							<form method="get" id="site-searchform" action="#">
+								<div>
+									<input class="input-text form-control" name="search-k" id="search-k" placeholder="Search keywords..." type="text">
+									<input id="searchsubmit" value="Search" type="submit">
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="widget-categories">
+						<h3 class="widget-title">Categories</h3>
+
+							<ul>
+								{% for category in categories %}
+								<li><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+								{% endfor %}
+							</ul>
+					</div>
+					<div class="widget-tags">
+						<h3 class="widget-title">Search Tags</h3>
+						<ul class="tags">
+							{% for tag in tags %}
+							<li><a href="{% url 'tag' tag.slug %}">{% if tag.slug in request.path %}<b>{{tag.name}}</b> {% else %}{{ tag.name }} {% endif %}</a></li>
+							{% endfor %}
+							
+						</ul>
+					</div>
+				</div>
+            </div><!-- end row -->
+			<div class="row">
+				<div class="col-md-10 animate-box fadeInUp animated-fast">
+					<div class="col-md-6 animate-box">
+						<div class="course">
+							<a href="#" class="course-img" style="background-image: url({{course.image.url}});">
+							</a>
+							<div class="desc">
+								<h3><a href="#">{{ course.name }}</a></h3>
+								<p>{{ course.description}}</p>
+						
+							</div>
+						</div>
+				
+			</div>
+				
+			</div>
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+    {% endblock %}

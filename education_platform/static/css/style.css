@@ -533,7 +533,7 @@ h1, h2, h3, h4, h5, h6, figure {
   margin-bottom: 30px;
 }
 .course .desc, .course .course-img {
-  width: 50%;
+  width: 40%;
   display: inline-block;
 }
 @media screen and (max-width: 768px) {

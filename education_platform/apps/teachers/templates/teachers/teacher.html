@@ -1,0 +1,60 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="all-title-box">
+    <div class="container text-center">
+        <h1>{{ teacher.name }}<span class="m_1"></span></h1>
+    </div>
+</div>
+
+<div id="overviews" class="section wb">
+    <div class="container">
+        <div class="row"> 
+            <div class="col-lg-9 blog-post-single">
+                
+				<div class="col-md-3 text-center">
+					<div class="staff">
+                        <h3 class="author_name"><a href="#">{{teacher.name}}</a></h3>
+                        <h5>{{teacher.tile}}</h5>
+                        <p class="author_det">
+                            {{teacher.description}}
+                        </p>
+                    </div>
+                    <div class="staff-img" style="background-image: url({{ teacher.image.url }});">
+                        <ul class="fh5co-social">
+                            <li><a href="{{teacher.facebook}}"><i class="icon-facebook2"></i></a></li>
+                            <li><a href="{{teacher.twitter}}"><i class="icon-twitter2"></i></a></li>
+                            <li><a href="{{teacher.youtube}}"><i class="icon-youtube"></i></a></li>
+                            <li><a href="{{teacher.linkedin}}"><i class="icon-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+            </div><!-- end col -->
+            
+        </div><!-- end row -->
+
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-md-6 animate-box">
+                <div class="course">
+                    <a href="#" class="course-img" style="background-image: url({{course.image.url}});">
+                    </a>
+                    <div class="desc">
+                        <h3><a href="#">{{ course.name }}</a></h3>
+                        <p>{{ course.description | truncatechars:120 }}</p>
+                        <span><a href="{% url 'course' course.category.slug course.id %}" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div><!-- end container -->
+</div><!-- end section -->
+
+{% endblock %}
