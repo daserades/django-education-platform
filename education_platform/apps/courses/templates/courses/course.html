@@ -7,16 +7,17 @@
 			<h1>{{ course.name }}<span class="m_1"></span></h1>
 		</div>
 	</div>
-
+	<br>
     <div id="overviews" class="section wb">
         <div class="container">
             <div class="row"> 
 				<div class="col-md-10 animate-box fadeInUp animated-fast">
-					<div class="container text-center mr-5">
-						<img class="img-thumbnail text-center" src="{{course.image.url}}" style="width: 400px;">
+					<div class="container">
+						<img class="img-thumbnail" src="{{course.image.url}}" style="width: 400px;">
 					</img>
-					<h6></h6>
-						<h6><span>{{course.date |date:"d M Y"}}</span><span> | Students</span></h6>
+					<br>
+					<br>
+						<h6 ><span>{{course.date |date:"d M Y"}}</span><span>    |   {{user_count}} Students Enrolled </span></h6>
 						<h6><a href="{% url 'teacher' course.teacher.pk %}">{{course.teacher.name}}</a></h6>
 						{% if user.is_authenticated %}
 							{% if course in enrolled_courses %}
@@ -29,11 +30,12 @@
 								</button>
 							{% endif %}
 						{% endif %}
+						<p class="" style=" max-width: 120ch;">{{course.description}}</p>
+					</div>
 						
 					</div>
-						<p>{{course.description}}</p>
-					</div>
-					
+					<br>
+					<br>
                 <!-- end col -->
 				<div class="col-md-2 animate-box fadeInUp animated-fast">
 					<div class="widget-search">
@@ -77,25 +79,25 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2 class="modal-title" id="enrollModalLabel">Enroll The Course</h2>
 				<button type="button" class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
+				<span>&times;</span>
+			</button>
+				<h2 class="modal-title" id="enrollModalLabel">Enroll The Course</h2>
+				
 			</div>
 			<div class="modal-body">
 				<p>You will enroll the course below:</p>
-				<h1>{{course.name}}</h1>
+				<h3>{{course.name}}</h3>
 			</div>
 			<div class="modal-footer">
 				<form action="{% url 'enroll_the_course' %}" method="POST">
 					{% csrf_token %}
 					<input type="hidden" name="user_id" value="{{user.id}}">
 					<input type="hidden" name="course_id" value="{{course.id}}">
-					<input type="submit" value="I AM SURE" class="btn btn-success">
+					<input type="submit" value="I am sure" class="btn btn-success">
+					<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
 				</form>
-				<button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">
-					CANCEL
-				</button>
+
 			</div>
 		</div>
 	</div>
@@ -107,25 +109,26 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2 class="modal-title" id="releaseModalLabel">Enroll The Course</h2>
 				<button type="button" class="close" data-dismiss="modal">
 					<span>&times;</span>
 				</button>
+				<h2 class="modal-title" id="releaseModalLabel">Release The Course</h2>
 			</div>
 			<div class="modal-body">
 				<p>You will release the course below:</p>
-				<h1>{{course.name}}</h1>
+				<h3>{{course.name}}</h3>
 			</div>
 			<div class="modal-footer">
 				<form action="{% url 'release_the_course' %}" method="POST">
 					{% csrf_token %}
 					<input type="hidden" name="user_id" value="{{user.id}}">
 					<input type="hidden" name="course_id" value="{{course.id}}">
-					<input type="submit" value="I AM SURE" class="btn btn-danger">
+					<input type="submit" value="I am sure" class="btn btn-danger">
+					<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+						
+					</input>
 				</form>
-				<button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">
-					CANCEL
-				</button>
+				
 			</div>
 		</div>
 	</div>

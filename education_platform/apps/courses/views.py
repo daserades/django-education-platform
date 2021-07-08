@@ -34,12 +34,14 @@ def course(request, category_slug, course_id):
         enrolled_courses =current_user.courses_join.all()
     else:
         enrolled_courses=courses
-
+    user_count = course.students.count()
+    print(user_count)
     context = {
         'course':course,
         'enrolled_courses': enrolled_courses,
         'categories':categories,
         'tags':tags,
+        'user_count':user_count,
     }
     return render(request,'courses/course.html',context)
 
