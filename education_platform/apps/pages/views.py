@@ -5,13 +5,8 @@ from django.views.generic import TemplateView
 from ..courses.models import Category, Course
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-# def index(request):
-#     return render(request,'pages/index.html')
-
-
-# def about(request):
-#     return render(request,'pages/about.html') 
-
+from django.contrib.auth.models import User
+from ..teachers.models import Teacher
 
 class AboutView(TemplateView):
     template_name='pages/about.html'
@@ -24,6 +19,8 @@ class IndexView(TemplateView):
         context['courses'] =Course.objects.filter(available=True).order_by('-date')[:4]
         context['total_course']= Course.objects.filter(available=True).count()
         context['categories'] =Category.objects.all()
+        context['total_students'] =User.objects.count()
+        context['total_teachers'] =Teacher.objects.count()
         return context
 
 class ContactView(SuccessMessageMixin,FormView):

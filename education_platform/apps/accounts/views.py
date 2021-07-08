@@ -1,9 +1,10 @@
+from ..courses.models import Course
 from .forms import LoginForm, RegisterForm
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login,logout
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.contrib.auth.models import User
 def user_register(request):
     
     if request.method == 'POST':
@@ -41,5 +42,30 @@ def user_logout(request):
     logout(request)
     return redirect('index')
 
+@login_required(login_url='login')
 def user_dashboard(request):
-    return render()
+    current_user =request.user
+    courses = current_user.courses_join.all()
+    context = {
+        'courses':courses
+    }
+    return render(request,'accounts/dashboard.html',context)
+
+def enroll_the_course(request):
+    course_id = request.POST['course_id']
+    user_id = request.POST['user_id']
+    course =Course.objects.get(id=course_id)
+    user=User.objects.get(id=user_id)
+    course.students.add(user)
+    print(course)
+    return redirect('dashboard')
+
+
+def release_the_course(request):
+    course_id = request.POST['course_id']
+    user_id = request.POST['user_id']
+    course = Course.objects.get(id = course_id)
+    user = User.objects.get(id = user_id)
+    course.students.remove(user)
+    return redirect('dashboard')
+

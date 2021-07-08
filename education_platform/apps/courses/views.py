@@ -2,9 +2,19 @@ from django.shortcuts import render
 from .models import Course,Category,Tag
 
 def course_list(request):
-    courses =Course.objects.all().order_by('-date')
+    
     categories = Category.objects.all()
     tags = Tag.objects.all()
+    current_user =request.user
+    if current_user.is_authenticated:
+        enrolled_course =current_user.courses_join.all()
+        courses =Course.objects.all().order_by('-date')
+        for course in enrolled_course:
+            courses= courses.exclude(id=course.id)
+
+    else:
+        courses =Course.objects.all().order_by('-date')
+
     context = { 
         'courses':courses,
         'categories':categories,
@@ -15,9 +25,21 @@ def course_list(request):
 
 
 def course(request, category_slug, course_id):
+    courses =Course.objects.all().order_by('-date')
+    current_user =request.user
     course = Course.objects.get(category__slug=category_slug, id= course_id)
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+    if current_user.is_authenticated:
+        enrolled_courses =current_user.courses_join.all()
+    else:
+        enrolled_courses=courses
+
     context = {
-        'course':course
+        'course':course,
+        'enrolled_courses': enrolled_courses,
+        'categories':categories,
+        'tags':tags,
     }
     return render(request,'courses/course.html',context)
 
@@ -55,3 +77,4 @@ def search(request):
        'tags':tags
     }
     return render(request,'courses/courses.html',context)
+

@@ -19,6 +19,7 @@
 						</a>
 						<div class="desc">
 							<h3><a href="#">{{ course.name }}</a></h3>
+								<h6><span>{{course.date |date:"d M Y"}}</span> <span>| {{course.teacher}}</span></h6>
 							<p>{{ course.description | truncatechars:120 }}</p>
 							<span><a href="{% url 'course' course.category.slug course.id %}" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
 						</div>

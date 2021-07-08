@@ -81,25 +81,20 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="row">
-						<div class="col-md-3 col-sm-6 text-center animate-box">
+						<div class="col-md-4 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-world"></i></span>
 							<span class="fh5co-counter js-counter" data-from="0" data-to="{{ total_course }}" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Total Course</span>
 						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
+						<div class="col-md-4 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-study"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="{{ total_course }}" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Students Enrolled</span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="{{ total_students }}" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter-label">Total Students</span>
 						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
-							<span class="icon"><i class="icon-bulb"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="5034" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Classes Complete</span>
-						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
+						<div class="col-md-4 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-head"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="1080" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Certified Teachers</span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="{{ total_teachers }}" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter-label">Total Teachers</span>
 						</div>
 					</div>
 				</div>
@@ -112,7 +107,6 @@
 			<div class="row animate-box">
 				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
 					<h2>Our Course</h2>
-					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
 				</div>
 			</div>
 			<div class="row">
@@ -134,50 +128,5 @@
 		</div>
 	</div>
 
-	<div id="fh5co-testimonial">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-					<h2><span>Testimonials</span></h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
-					<div class="row animate-box">
-						<div class="owl-carousel owl-carousel-fullwidth">
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<div class="user" ></div>
-									<span>Mary Walker<br><small>Students</small></span>
-									<blockquote>
-										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<div class="user" ></div>
-									<span>Mike Smith<br><small>Students</small></span>
-									<blockquote>
-										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<div class="user" ></div>
-									<span>Rita Jones<br><small>Teacher</small></span>
-									<blockquote>
-										<p>&ldquo;Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	{% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models.base import ModelState
 from ..teachers.models import Teacher
+from django.contrib.auth.models import User
+
 class Category(models.Model):
     name=models.CharField(max_length=100,null=True)
     slug=models.SlugField(max_length=50,null=True, unique=True)
@@ -25,6 +27,8 @@ class Course(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.DO_NOTHING)
     tags =models.ManyToManyField(Tag, blank=True, null =True)
     teacher = models.ForeignKey(Teacher, null=True, on_delete=models.CASCADE)
+    students =models.ManyToManyField(User, blank=True, related_name='courses_join')
+    
     def __str__(self):
         return self.name
 

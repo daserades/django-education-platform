@@ -6,7 +6,7 @@ from django.db import models
 class Teacher(models.Model):
     name = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
-    descrition = models.TextField(blank=True)
+    description = models.TextField(blank=True)
     image = models.ImageField(upload_to="courses/%Y/%m/%d/")
     facebook = models.URLField(max_length=100,blank=True)
     twitter = models.URLField(max_length=100,blank=True)

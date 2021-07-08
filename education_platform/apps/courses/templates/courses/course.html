@@ -3,7 +3,7 @@
 {% block content %}
 
 	<div class="all-title-box">
-		<div class="container text-center">
+		<div class="container text-center mr-5">
 			<h1>{{ course.name }}<span class="m_1"></span></h1>
 		</div>
 	</div>
@@ -12,21 +12,29 @@
         <div class="container">
             <div class="row"> 
 				<div class="col-md-10 animate-box fadeInUp animated-fast">
-					<div class="staff">
-						<div class="staff-img" style="background-image: url({{ course.image.url }});">
-							<ul class="fh5co-social">
-								<li><a href="{{course.teacher.facebook}}"><i class="icon-facebook2"></i></a></li>
-								<li><a href="{{course.teacher.twitter}}"><i class="icon-twitter2"></i></a></li>
-								<li><a href="{{course.teacher.youtube}}"><i class="icon-youtube"></i></a></li>
-								<li><a href="{{course.teacher.linkedin}}"><i class="icon-linkedin"></i></a></li>
-							</ul>
-						</div>
-
-						<h3><a href="{% url 'teacher' course.teacher.pk %}">{{course.teacher.name}}</a></h3>
+					<div class="container text-center mr-5">
+						<img class="img-thumbnail text-center" src="{{course.image.url}}" style="width: 400px;">
+					</img>
+					<h6></h6>
+						<h6><span>{{course.date |date:"d M Y"}}</span><span> | Students</span></h6>
+						<h6><a href="{% url 'teacher' course.teacher.pk %}">{{course.teacher.name}}</a></h6>
+						{% if user.is_authenticated %}
+							{% if course in enrolled_courses %}
+								<button type="submit" class="btn btn-outline-danger rounded-0 float-right" data-toggle="modal" data-target="#releaseModal">
+									<span>Release</span>
+								</button>
+							{% else %}
+								<button type="submit" class="btn btn-outline-success rounded-0 float-right" data-toggle="modal" data-target="#enrollModal">
+									<span>Enroll</span>
+								</button>
+							{% endif %}
+						{% endif %}
+						
+					</div>
 						<p>{{course.description}}</p>
 					</div>
 					
-                </div><!-- end col -->
+                <!-- end col -->
 				<div class="col-md-2 animate-box fadeInUp animated-fast">
 					<div class="widget-search">
 						<div class="site-search-area">
@@ -58,23 +66,69 @@
 					</div>
 				</div>
             </div><!-- end row -->
-			<div class="row">
-				<div class="col-md-10 animate-box fadeInUp animated-fast">
-					<div class="col-md-6 animate-box">
-						<div class="course">
-							<a href="#" class="course-img" style="background-image: url({{course.image.url}});">
-							</a>
-							<div class="desc">
-								<h3><a href="#">{{ course.name }}</a></h3>
-								<p>{{ course.description}}</p>
-						
-							</div>
-						</div>
-				
-			</div>
+
 				
 			</div>
         </div><!-- end container -->
     </div><!-- end section -->
+<!-- ENROLL Modal -->
+<div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="enrollModalLabel">Enroll The Course</h2>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>You will enroll the course below:</p>
+				<h1>{{course.name}}</h1>
+			</div>
+			<div class="modal-footer">
+				<form action="{% url 'enroll_the_course' %}" method="POST">
+					{% csrf_token %}
+					<input type="hidden" name="user_id" value="{{user.id}}">
+					<input type="hidden" name="course_id" value="{{course.id}}">
+					<input type="submit" value="I AM SURE" class="btn btn-success">
+				</form>
+				<button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">
+					CANCEL
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- RELEASEModal -->
+<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog" aria-labelledby="releaseModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="releaseModalLabel">Enroll The Course</h2>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>You will release the course below:</p>
+				<h1>{{course.name}}</h1>
+			</div>
+			<div class="modal-footer">
+				<form action="{% url 'release_the_course' %}" method="POST">
+					{% csrf_token %}
+					<input type="hidden" name="user_id" value="{{user.id}}">
+					<input type="hidden" name="course_id" value="{{course.id}}">
+					<input type="submit" value="I AM SURE" class="btn btn-danger">
+				</form>
+				<button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">
+					CANCEL
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
 
     {% endblock %}

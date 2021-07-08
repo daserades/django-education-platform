@@ -6,5 +6,6 @@ urlpatterns = [
     path('categories/<slug:category_slug>',views.category, name="category"),
     path('tags/<slug:tag_slug>',views.tag, name="tag"),
     path('search/',views.search, name="search"),
+    
 
 ]

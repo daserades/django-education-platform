@@ -1,0 +1,40 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="all-title-box">
+    <div class="container text-center">
+        <h3>{{ user.username }}<span class="m_1"></span></h3>
+        <br/>
+        <h5 class="text-center">{{user.first_name}} {{user.last_name}}</h5>
+        <br/>
+    </div>
+</div>
+<br/>
+<br/>
+<div id="overviews" class="section wb">
+    <div class="container">
+        <h3 class="text-center">Courses Enrolled</h3>
+        <br/>
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-md-6 animate-box">
+                <div class="course">
+                    <a href="{% url 'course' course.category.slug course.id %}" class="course-img" style="background-image: url({{course.image.url}});">
+                    </a>
+                    <div class="desc">
+                        <h3><a href="{% url 'course' course.category.slug course.id %}">{{ course.name }}</a></h3><h6><span>{{course.date |date:"d M Y"}}</span><span> | Students</span></h6>
+						<h6><a href="{% url 'teacher' course.teacher.pk %}">{{course.teacher.name}}</a></h6>
+                        <p>{{ course.description | truncatechars:120 }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div><!-- end container -->
+</div><!-- end section -->
+
+{% endblock %}
